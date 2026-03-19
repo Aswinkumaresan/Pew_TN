@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    /* Base surfaces — Light Theme */
+    --background: 215 30% 96%;
+    --foreground: 222 45% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 45% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 45% 12%;
+
+    /* Primary: Vibrant Indigo */
+    --primary: 230 72% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 215 30% 92%;
+    --secondary-foreground: 222 45% 18%;
+
+    /* Muted */
+    --muted: 214 25% 93%;
+    --muted-foreground: 215 18% 48%;
+
+    /* Accent: Teal/Cyan */
+    --accent: 185 72% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders */
+    --border: 214 22% 84%;
+    --input: 214 22% 88%;
+    --ring: 230 72% 52%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar — Deep Navy keeps authority */
+    --sidebar-background: 228 42% 18%;
+    --sidebar-foreground: 215 25% 78%;
+    --sidebar-primary: 210 100% 70%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 228 38% 24%;
+    --sidebar-accent-foreground: 215 25% 92%;
+    --sidebar-border: 228 35% 23%;
+    --sidebar-ring: 210 100% 70%;
+
+    /* Custom enforcement tokens */
+    --risk-high: 0 72% 52%;
+    --risk-medium: 32 95% 50%;
+    --risk-low: 148 60% 36%;
+    --intelligence: 268 62% 55%;
+    --gis-accent: 185 72% 38%;
+    --command-bar: 0 0% 100%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(230, 72%, 52%), hsl(185, 72%, 38%));
+    --gradient-card: linear-gradient(160deg, hsl(0, 0%, 100%), hsl(215, 30%, 97%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(228, 42%, 18%), hsl(228, 45%, 14%));
+    --gradient-danger: linear-gradient(135deg, hsl(0, 72%, 52%), hsl(20, 85%, 48%));
+    --gradient-success: linear-gradient(135deg, hsl(148, 60%, 36%), hsl(160, 55%, 32%));
+
+    /* Shadows */
+    --shadow-card: 0 2px 16px hsl(222 35% 18% / 0.08), 0 1px 4px hsl(222 35% 18% / 0.06);
+    --shadow-elevated: 0 8px 32px hsl(222 35% 18% / 0.12), 0 2px 8px hsl(222 35% 18% / 0.08);
+
+    /* Glows */
+    --glow-primary: 0 0 24px hsl(230 72% 52% / 0.2);
+    --glow-accent: 0 0 24px hsl(185 72% 38% / 0.2);
+    --glow-danger: 0 0 20px hsl(0 72% 52% / 0.18);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.4);
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply relative overflow-hidden rounded-xl border bg-card p-5 transition-all duration-200;
+    box-shadow: var(--shadow-card);
+    background: var(--gradient-card);
+    border-color: hsl(var(--border));
+  }
+  .stat-card:hover {
+    box-shadow: var(--shadow-elevated);
+    border-color: hsl(var(--primary) / 0.2);
+  }
+  .stat-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.04), transparent);
+    pointer-events: none;
+  }
+  .stat-card:hover::before {
+    @apply opacity-100;
+  }
+  .command-bar {
+    background: hsl(var(--command-bar));
+    border-bottom: 1px solid hsl(var(--border));
+    box-shadow: 0 1px 4px hsl(222 35% 18% / 0.06);
+  }
+  .risk-badge-high {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold;
+    background: hsl(var(--risk-high) / 0.15);
+    color: hsl(var(--risk-high));
+    border: 1px solid hsl(var(--risk-high) / 0.3);
+  }
+  .risk-badge-medium {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold;
+    background: hsl(var(--risk-medium) / 0.15);
+    color: hsl(var(--risk-medium));
+    border: 1px solid hsl(var(--risk-medium) / 0.3);
+  }
+  .risk-badge-low {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold;
+    background: hsl(var(--risk-low) / 0.15);
+    color: hsl(var(--risk-low));
+    border: 1px solid hsl(var(--risk-low) / 0.3);
+  }
+  .risk-badge-intel {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold;
+    background: hsl(var(--intelligence) / 0.15);
+    color: hsl(var(--intelligence));
+    border: 1px solid hsl(var(--intelligence) / 0.3);
+  }
+  .gis-control-panel {
+    @apply absolute z-10 rounded-lg border bg-card/90 p-3 backdrop-blur-md;
+    box-shadow: var(--shadow-elevated);
+  }
+  .nav-item-active {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+    border-left: 2px solid hsl(var(--primary));
+  }
+  .data-table-row {
+    @apply border-b border-border/50 transition-colors hover:bg-muted/30;
+  }
+  .pulse-dot {
+    @apply relative inline-flex h-2.5 w-2.5;
+  }
+  .pulse-dot::before {
+    content: '';
+    @apply absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping;
+    background: hsl(var(--risk-low));
+  }
+  .pulse-dot::after {
+    content: '';
+    @apply relative inline-flex h-2.5 w-2.5 rounded-full;
+    background: hsl(var(--risk-low));
+  }
+}
+
+@media print {
+  body.print-report-mode {
+    background: white;
+    color: black;
+  }
+  
+  body.print-report-mode * {
+    visibility: hidden;
+  }
+  
+  body.print-report-mode #report-print-container, 
+  body.print-report-mode #report-print-container * {
+    visibility: visible;
+  }
+  
+  body.print-report-mode #report-print-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    border: none !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+
+  body.print-report-mode .no-print {
+    display: none !important;
+  }
+
+  body.print-report-mode .bg-muted\/20,
+  body.print-report-mode .bg-muted\/10,
+  body.print-report-mode .bg-card,
+  body.print-report-mode .bg-background {
+    background-color: transparent !important;
+  }
+
+  body.print-report-mode .border {
+    border-color: #ddd !important;
+  }
+
+  body.print-report-mode .text-foreground {
+    color: black !important;
+  }
+
+  body.print-report-mode .text-muted-foreground {
+    color: #555 !important;
+  }
+}
