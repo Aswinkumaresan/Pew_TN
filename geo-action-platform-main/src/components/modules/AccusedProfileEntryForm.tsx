@@ -11,6 +11,12 @@ const tnDistricts = [
 
 const statusOptions = ["Active", "Detained", "Released", "Absconding", "Under Surveillance"];
 const riskOptions = ["low", "medium", "high"];
+const caseStatusOptions = [
+  "New Pending",
+  "Judicial Custody",
+  "On Bail",
+  "Detained in Goondas",
+];
 
 const inputCls =
   "w-full rounded-lg border px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-1 focus:ring-primary";
@@ -29,9 +35,15 @@ export function AccusedProfileEntryForm({ onClose }: { onClose: () => void }) {
   const [risk, setRisk] = useState("medium");
   const [offences, setOffences] = useState<string[]>([]);
 
+  // Police Classification
+  const [caseStatus, setCaseStatus] = useState("");
+  const [isHistorySheeter, setIsHistorySheeter] = useState(false);
+  const [isLevelAPlus, setIsLevelAPlus] = useState(false);
+  const [ovDetails, setOvDetails] = useState("");
+
   // Dynamic Lists
   const [sellingPoints, setSellingPoints] = useState<string[]>([""]);
-  
+
   const [associates, setAssociates] = useState<{ id: number; name: string; role: string; risk: string }[]>([
     { id: 1, name: "", role: "", risk: "low" },
   ]);
@@ -143,7 +155,7 @@ export function AccusedProfileEntryForm({ onClose }: { onClose: () => void }) {
             </select>
           </div>
           <div>
-            <label className={labelCls}>Status</label>
+            <label className={labelCls}>Present Status</label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
@@ -169,6 +181,89 @@ export function AccusedProfileEntryForm({ onClose }: { onClose: () => void }) {
                 </option>
               ))}
             </select>
+          </div>
+        </div>
+      </div>
+
+      {/* ── POLICE CLASSIFICATION ── */}
+      <div
+        className={sectionCls}
+        style={{ borderColor: "hsl(var(--border))" }}
+      >
+        <p className={sectionTitleCls}>Police Classification</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className={labelCls}>Case Status</label>
+            <select
+              value={caseStatus}
+              onChange={(e) => setCaseStatus(e.target.value)}
+              className={inputCls}
+              style={{ borderColor: "hsl(var(--border))" }}
+            >
+              <option value="">Select Case Status</option>
+              {caseStatusOptions.map((s) => (
+                <option key={s}>{s}</option>
+              ))}
+            </select>
+            <p className="text-[10px] text-muted-foreground mt-1">
+              {caseStatus === "New Pending" && "Recently registered case still under investigation / trial."}
+              {caseStatus === "Judicial Custody" && "Accused held in jail under magistrate/court authority."}
+              {caseStatus === "On Bail" && "Temporarily released by court with conditions."}
+              {caseStatus === "Detained in Goondas" && "Detained under TN Goondas Act (preventive detention)."}
+            </p>
+          </div>
+          <div>
+            <label className={labelCls}>O.V. (Offence Vehicle / Old Offence Verified)</label>
+            <input
+              value={ovDetails}
+              onChange={(e) => setOvDetails(e.target.value)}
+              className={inputCls}
+              style={{ borderColor: "hsl(var(--border))" }}
+              placeholder="e.g. Vehicle No. / Verified case reference"
+            />
+            <p className="text-[10px] text-muted-foreground mt-1">
+              Offence Vehicle involved or Old Offence Verified reference.
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-6 mt-2">
+          {/* History Sheeter */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsHistorySheeter((v) => !v)}
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${isHistorySheeter ? "" : "bg-muted"
+                }`}
+              style={isHistorySheeter ? { background: "hsl(var(--primary))" } : {}}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition-transform ${isHistorySheeter ? "translate-x-5" : "translate-x-0"
+                  }`}
+              />
+            </button>
+            <div>
+              <p className="text-sm font-semibold text-foreground">History Sheeter</p>
+              <p className="text-[10px] text-muted-foreground">Listed as habitual offender in police records.</p>
+            </div>
+          </div>
+          {/* Level A+ */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsLevelAPlus((v) => !v)}
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${isLevelAPlus ? "" : "bg-muted"
+                }`}
+              style={isLevelAPlus ? { background: "hsl(var(--destructive))" } : {}}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition-transform ${isLevelAPlus ? "translate-x-5" : "translate-x-0"
+                  }`}
+              />
+            </button>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Level A+</p>
+              <p className="text-[10px] text-muted-foreground">High-risk / highly active offender requiring close surveillance.</p>
+            </div>
           </div>
         </div>
       </div>

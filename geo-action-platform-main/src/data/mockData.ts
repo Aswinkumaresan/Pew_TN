@@ -2,7 +2,7 @@ export const kpiData = [
   { label: "Active Cases", value: 1247, delta: "+12%", deltaType: "up", icon: "briefcase", color: "primary" },
   { label: "Seizures Today", value: 38, delta: "+5", deltaType: "up", icon: "package", color: "accent" },
   { label: "High-Risk Districts", value: 6, delta: "-1", deltaType: "down", icon: "alert-triangle", color: "risk-high" },
-  { label: "Intel Reports", value: 184, delta: "+22", deltaType: "up", icon: "brain", color: "intel" },
+  { label: "Source Reports - Pending", value: 10, delta: "+22", deltaType: "up", icon: "brain", color: "intel" },
   { label: "Checkposts Active", value: 42, delta: "0", deltaType: "neutral", icon: "shield", color: "risk-low" },
   { label: "Helpline Calls", value: 93, delta: "+8", deltaType: "up", icon: "phone", color: "risk-medium" },
 ];
@@ -62,11 +62,26 @@ export const auditLogs = [
 ];
 
 export const intelligenceProfiles = [
-  { id: "ACC-001", name: "Murugan Thevar", age: 38, district: "Chennai", risk: "high", cases: 4, status: "Active", associates: 6 },
-  { id: "ACC-002", name: "Durai Singam", age: 44, district: "Madurai", risk: "high", cases: 7, status: "Active", associates: 12 },
-  { id: "ACC-003", name: "Velan Raju", age: 29, district: "Coimbatore", risk: "medium", cases: 2, status: "Absconding", associates: 3 },
-  { id: "ACC-004", name: "Anbu Selvan", age: 35, district: "Tiruchirappalli", risk: "medium", cases: 3, status: "Arrested", associates: 5 },
-  { id: "ACC-005", name: "Kumaran Pillai", age: 51, district: "Salem", risk: "low", cases: 1, status: "Released on Bail", associates: 2 },
+  {
+    id: "ACC-001", name: "Murugan Thevar", age: 38, district: "Chennai", risk: "high", cases: 4, status: "Active", associates: 6,
+    caseStatus: "Judicial Custody", isHistorySheeter: true, isLevelAPlus: true, ovDetails: "TN-09-AK-7832 (Seized — NDPS transport)",
+  },
+  {
+    id: "ACC-002", name: "Durai Singam", age: 44, district: "Madurai", risk: "high", cases: 7, status: "Active", associates: 12,
+    caseStatus: "New Pending", isHistorySheeter: true, isLevelAPlus: true, ovDetails: "CS-2024-1829 (verified — inter-state supply)",
+  },
+  {
+    id: "ACC-003", name: "Velan Raju", age: 29, district: "Coimbatore", risk: "medium", cases: 2, status: "Absconding", associates: 3,
+    caseStatus: "New Pending", isHistorySheeter: false, isLevelAPlus: false, ovDetails: "",
+  },
+  {
+    id: "ACC-004", name: "Anbu Selvan", age: 35, district: "Tiruchirappalli", risk: "medium", cases: 3, status: "Arrested", associates: 5,
+    caseStatus: "Detained in Goondas", isHistorySheeter: true, isLevelAPlus: false, ovDetails: "TN-45-BX-2219 (linked — contraband seizure)",
+  },
+  {
+    id: "ACC-005", name: "Kumaran Pillai", age: 51, district: "Salem", risk: "low", cases: 1, status: "Released on Bail", associates: 2,
+    caseStatus: "On Bail", isHistorySheeter: false, isLevelAPlus: false, ovDetails: "",
+  },
 ];
 
 export const mapMarkers = [

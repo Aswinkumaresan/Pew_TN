@@ -22,11 +22,11 @@ const liquorCategories = [
 type Row = { cases: string; quantity: string; accused: string };
 type Vehicles = { "2w": string; "3w": string; "4W": string; "6W": string };
 
-export function DSRPEWForm() {
-  const [zone, setZone] = useState("Chennai Zone");
-  const [noOfCases, setNoOfCases] = useState("45");
-  const [noOfAccused, setNoOfAccused] = useState("52");
-  const [remand, setRemand] = useState("40");
+export function DSRLocalForm() {
+  const [zone, setZone] = useState("Madurai Zone");
+  const [noOfCases, setNoOfCases] = useState("35");
+  const [noOfAccused, setNoOfAccused] = useState("42");
+  const [remand, setRemand] = useState("30");
   const [rows, setRows] = useState<Record<string, Row>>({
     ...Object.fromEntries(
       liquorCategories.map((c) => [
@@ -34,15 +34,15 @@ export function DSRPEWForm() {
         { cases: "0", quantity: "0", accused: "0" },
       ]),
     ),
-    "Rectified Spirit": { cases: "12", quantity: "600", accused: "10" },
-    "Pondy Arrack": { cases: "8", quantity: "400", accused: "6" },
-    "TN IMFL": { cases: "15", quantity: "180", accused: "12" },
+    "Rectified Spirit": { cases: "10", quantity: "500", accused: "8" },
+    "Pondy Arrack": { cases: "6", quantity: "300", accused: "4" },
+    "ID Arrack": { cases: "4", quantity: "200", accused: "3" },
   });
   const [vehicles, setVehicles] = useState<Vehicles>({
-    "2w": "24",
-    "3w": "2",
-    "4W": "4",
-    "6W": "1",
+    "2w": "18",
+    "3w": "3",
+    "4W": "2",
+    "6W": "0",
   });
 
   const updateRow = (label: string, field: keyof Row, value: string) => {
@@ -69,7 +69,7 @@ export function DSRPEWForm() {
   };
 
   const handleSave = () => {
-    console.log("PEW Report Saved", {
+    console.log("Local Report Saved", {
       zone,
       noOfCases,
       noOfAccused,
@@ -106,7 +106,7 @@ export function DSRPEWForm() {
               <tr>
                 <th className={thCls}>Zone</th>
                 <th className={thCls}>District</th>
-                <th className={thCls}>PEW</th>
+                <th className={thCls}>Local</th>
                 <th className={thCls}>No. of Cases</th>
                 <th className={thCls}>No. of Accused</th>
                 <th className={thCls}>Remand</th>
@@ -313,7 +313,7 @@ export function DSRPEWForm() {
             color: "hsl(var(--primary-foreground))",
           }}
         >
-          Save PEW Report
+          Save Local Report
         </button>
       </div>
     </div>

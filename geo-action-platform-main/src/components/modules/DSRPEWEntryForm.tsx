@@ -23,15 +23,16 @@ const tnDistricts = [
 ];
 
 const seizureCategories = [
-  { label: "F.Wash", unit: "Litres" },
-  { label: "ID Arrack", unit: "Litres" },
-  { label: "Pondy Arrack", unit: "Litres" },
-  { label: "AP ID Arrack", unit: "Litres" },
   { label: "Rectified Spirit", unit: "Litres" },
-  { label: "Spurious Liquor", unit: "Bottles" },
+  { label: "Methyl Alcohol", unit: "Litres" },
+  { label: "Pondy Arrack", unit: "Litres" },
   { label: "Pondy IMFL", unit: "Bottles" },
   { label: "KA IMFL", unit: "Bottles" },
+  { label: "AP ID Arrack", unit: "Litres" },
   { label: "TN IMFL", unit: "Bottles" },
+  { label: "F.Wash", unit: "Litres" },
+  { label: "ID Arrack", unit: "Litres" },
+  { label: "Spurious Liquor", unit: "Bottles" },
   { label: "Foreign Liquor", unit: "Bottles" },
   { label: "Military Liquor", unit: "Bottles" },
   { label: "Other IMFL", unit: "Bottles" },
@@ -161,12 +162,13 @@ export function DSRPEWEntryForm({ onClose }: { onClose: () => void }) {
           <button
             key={step}
             onClick={() => setActiveStep(i)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${i === activeStep
-              ? "text-primary-foreground"
-              : i < activeStep
-                ? "bg-primary/20 text-primary"
-                : "bg-muted text-muted-foreground"
-              }`}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
+              i === activeStep
+                ? "text-primary-foreground"
+                : i < activeStep
+                  ? "bg-primary/20 text-primary"
+                  : "bg-muted text-muted-foreground"
+            }`}
             style={
               i === activeStep
                 ? { background: "hsl(var(--primary))" }

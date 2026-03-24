@@ -106,6 +106,11 @@ export type AccusedData = {
   drugDestination: string;
   confessionRecorded: boolean;
   gangLinks: string;
+  // Police Classification
+  caseStatus: string;
+  isHistorySheeter: boolean;
+  isLevelAPlus: boolean;
+  ovDetails: string;
 };
 
 const defaultAccusedData: AccusedData = {
@@ -137,6 +142,10 @@ const defaultAccusedData: AccusedData = {
   drugDestination: "",
   confessionRecorded: false,
   gangLinks: "",
+  caseStatus: "",
+  isHistorySheeter: false,
+  isLevelAPlus: false,
+  ovDetails: "",
 };
 
 const inputCls =
@@ -798,6 +807,96 @@ export function AccusedDetailsSection({
                 className={inputCls + " resize-none"}
                 style={{ borderColor: "hsl(var(--border))" }}
               />
+            </div>
+          </div>
+
+          {/* 5. Police Classification */}
+          <div
+            className={sectionCls}
+            style={{ borderColor: "hsl(var(--border))" }}
+          >
+            <p className="text-xs font-bold text-foreground uppercase tracking-wide">
+              5. Police Classification
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={labelCls}>Case Status</label>
+                <select
+                  value={data.caseStatus}
+                  onChange={(e) => set("caseStatus", e.target.value)}
+                  className={inputCls}
+                  style={{ borderColor: "hsl(var(--border))" }}
+                >
+                  <option value="">Select Case Status</option>
+                  <option value="New Pending">New Pending</option>
+                  <option value="Judicial Custody">Judicial Custody</option>
+                  <option value="On Bail">On Bail</option>
+                  <option value="Detained in Goondas">Detained in Goondas</option>
+                </select>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  {data.caseStatus === "New Pending" && "Recently registered case still under investigation / trial."}
+                  {data.caseStatus === "Judicial Custody" && "Accused held in jail under magistrate/court authority."}
+                  {data.caseStatus === "On Bail" && "Temporarily released by court with conditions."}
+                  {data.caseStatus === "Detained in Goondas" && "Detained under TN Goondas Act (preventive detention)."}
+                </p>
+              </div>
+              <div>
+                <label className={labelCls}>O.V. (Offence Vehicle / Old Offence Verified)</label>
+                <input
+                  value={data.ovDetails}
+                  onChange={(e) => set("ovDetails", e.target.value.slice(0, 200))}
+                  className={inputCls}
+                  style={{ borderColor: "hsl(var(--border))" }}
+                  placeholder="e.g. Vehicle No. / Verified case reference"
+                />
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Offence Vehicle involved or Old Offence Verified reference.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-8 mt-3">
+              {/* History Sheeter */}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => set("isHistorySheeter", !data.isHistorySheeter)}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${
+                    data.isHistorySheeter ? "" : "bg-muted"
+                  }`}
+                  style={data.isHistorySheeter ? { background: "hsl(var(--primary))" } : {}}
+                >
+                  <span
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition-transform ${
+                      data.isHistorySheeter ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">History Sheeter</p>
+                  <p className="text-[10px] text-muted-foreground">Listed as habitual offender in police records.</p>
+                </div>
+              </div>
+              {/* Level A+ */}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => set("isLevelAPlus", !data.isLevelAPlus)}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors ${
+                    data.isLevelAPlus ? "" : "bg-muted"
+                  }`}
+                  style={data.isLevelAPlus ? { background: "hsl(var(--destructive))" } : {}}
+                >
+                  <span
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition-transform ${
+                      data.isLevelAPlus ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Level A+</p>
+                  <p className="text-[10px] text-muted-foreground">High-risk / highly active offender — close surveillance required.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

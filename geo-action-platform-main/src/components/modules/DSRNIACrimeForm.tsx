@@ -22,11 +22,11 @@ const liquorCategories = [
 type Row = { cases: string; quantity: string; accused: string };
 type Vehicles = { "2w": string; "3w": string; "4W": string; "6W": string };
 
-export function DSRPEWForm() {
+export function DSRNIACrimeForm() {
   const [zone, setZone] = useState("Chennai Zone");
-  const [noOfCases, setNoOfCases] = useState("45");
-  const [noOfAccused, setNoOfAccused] = useState("52");
-  const [remand, setRemand] = useState("40");
+  const [noOfCases, setNoOfCases] = useState("12");
+  const [noOfAccused, setNoOfAccused] = useState("18");
+  const [remand, setRemand] = useState("15");
   const [rows, setRows] = useState<Record<string, Row>>({
     ...Object.fromEntries(
       liquorCategories.map((c) => [
@@ -34,15 +34,14 @@ export function DSRPEWForm() {
         { cases: "0", quantity: "0", accused: "0" },
       ]),
     ),
-    "Rectified Spirit": { cases: "12", quantity: "600", accused: "10" },
-    "Pondy Arrack": { cases: "8", quantity: "400", accused: "6" },
-    "TN IMFL": { cases: "15", quantity: "180", accused: "12" },
+    "Spurious Liquor": { cases: "4", quantity: "48", accused: "4" },
+    "Methyl Alcohol": { cases: "2", quantity: "100", accused: "2" },
   });
   const [vehicles, setVehicles] = useState<Vehicles>({
-    "2w": "24",
-    "3w": "2",
-    "4W": "4",
-    "6W": "1",
+    "2w": "8",
+    "3w": "1",
+    "4W": "2",
+    "6W": "0",
   });
 
   const updateRow = (label: string, field: keyof Row, value: string) => {
@@ -69,7 +68,7 @@ export function DSRPEWForm() {
   };
 
   const handleSave = () => {
-    console.log("PEW Report Saved", {
+    console.log("NIA/Crime Report Saved", {
       zone,
       noOfCases,
       noOfAccused,
@@ -97,7 +96,7 @@ export function DSRPEWForm() {
           style={{ borderColor: "hsl(var(--border))" }}
         >
           <h3 className="text-sm font-bold text-foreground">
-            Zone & Case Summary
+            NIA/Crime - Zone & Case Summary
           </h3>
         </div>
         <div className="p-4">
@@ -106,7 +105,7 @@ export function DSRPEWForm() {
               <tr>
                 <th className={thCls}>Zone</th>
                 <th className={thCls}>District</th>
-                <th className={thCls}>PEW</th>
+                <th className={thCls}>NIA/Crime</th>
                 <th className={thCls}>No. of Cases</th>
                 <th className={thCls}>No. of Accused</th>
                 <th className={thCls}>Remand</th>
@@ -184,7 +183,7 @@ export function DSRPEWForm() {
           style={{ borderColor: "hsl(var(--border))" }}
         >
           <h3 className="text-sm font-bold text-foreground">
-            Liquor Seizure Details
+            Seizure Details (Alcohol & Drugs)
           </h3>
         </div>
         <div className="overflow-x-auto">
@@ -313,7 +312,7 @@ export function DSRPEWForm() {
             color: "hsl(var(--primary-foreground))",
           }}
         >
-          Save PEW Report
+          Save NIA/Crime Report
         </button>
       </div>
     </div>
