@@ -47,6 +47,20 @@ type CheckpostRow = {
   apIdAcc: string;
   apImflCase: string;
   apImflLtrs: string;
+  piCase: string;
+  piBtls: string;
+  kiCase: string;
+  kiLtrs: string;
+  tiCase: string;
+  tiBtls: string;
+  gtCase: string;
+  gtNos: string;
+  tdCase: string;
+  tdLtrs: string;
+  v2w: string;
+  v3w: string;
+  v4w: string;
+  v6w: string;
 };
 
 const PEW_LIQUOR_CATEGORIES = [
@@ -133,6 +147,20 @@ const emptyRow = (id: number): CheckpostRow => ({
   apIdAcc: "",
   apImflCase: "",
   apImflLtrs: "",
+  piCase: "",
+  piBtls: "",
+  kiCase: "",
+  kiLtrs: "",
+  tiCase: "",
+  tiBtls: "",
+  gtCase: "",
+  gtNos: "",
+  tdCase: "",
+  tdLtrs: "",
+  v2w: "0",
+  v3w: "0",
+  v4w: "0",
+  v6w: "0",
 });
 
 const emptyPEWRow = (id: number): PEWSeizureRow => {
@@ -927,11 +955,29 @@ function CheckpostSeizuresForm({
               <th className={`${thCls}`} colSpan={3}>
                 Pondy Arrack
               </th>
+              <th className={`${thCls}`} colSpan={2}>
+                Pondy IMFL
+              </th>
               <th className={`${thCls}`} colSpan={3}>
                 AP ID Arrack
               </th>
               <th className={`${thCls}`} colSpan={2}>
                 AP IMFL
+              </th>
+              <th className={`${thCls}`} colSpan={2}>
+                KA IMFL
+              </th>
+              <th className={`${thCls}`} colSpan={2}>
+                TN IMFL
+              </th>
+              <th className={`${thCls}`} colSpan={2}>
+                Ganja Tablet
+              </th>
+              <th className={`${thCls}`} colSpan={2}>
+                Toddy
+              </th>
+              <th className={`${thCls}`} colSpan={4}>
+                Vehicle Seized
               </th>
             </tr>
             <tr
@@ -948,10 +994,24 @@ function CheckpostSeizuresForm({
                 "Ltrs",
                 "Acc",
                 "Case",
+                "Btls",
+                "Case",
                 "Ltrs",
                 "Acc",
                 "Case",
                 "Ltrs",
+                "Case",
+                "Ltrs",
+                "Case",
+                "Btls",
+                "Case",
+                "Nos",
+                "Case",
+                "Ltrs",
+                "2W",
+                "3W",
+                "4W",
+                "6W",
               ].map((h, i) => (
                 <th key={i} className={thCls}>
                   {h}
@@ -1017,11 +1077,25 @@ function CheckpostSeizuresForm({
                     "paCase",
                     "paLtrs",
                     "paAcc",
+                    "piCase",
+                    "piBtls",
                     "apIdCase",
                     "apIdLtrs",
                     "apIdAcc",
                     "apImflCase",
                     "apImflLtrs",
+                    "kiCase",
+                    "kiLtrs",
+                    "tiCase",
+                    "tiBtls",
+                    "gtCase",
+                    "gtNos",
+                    "tdCase",
+                    "tdLtrs",
+                    "v2w",
+                    "v3w",
+                    "v4w",
+                    "v6w",
                   ] as (keyof CheckpostRow)[]
                 ).map((f) => (
                   <td
@@ -1062,11 +1136,25 @@ function CheckpostSeizuresForm({
                   "paCase",
                   "paLtrs",
                   "paAcc",
+                  "piCase",
+                  "piBtls",
                   "apIdCase",
                   "apIdLtrs",
                   "apIdAcc",
                   "apImflCase",
                   "apImflLtrs",
+                  "kiCase",
+                  "kiLtrs",
+                  "tiCase",
+                  "tiBtls",
+                  "gtCase",
+                  "gtNos",
+                  "tdCase",
+                  "tdLtrs",
+                  "v2w",
+                  "v3w",
+                  "v4w",
+                  "v6w",
                 ] as (keyof CheckpostRow)[]
               ).map((f) => (
                 <td
